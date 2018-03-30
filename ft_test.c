@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 18:32:28 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/24 22:49:50 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/26 17:34:46 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int         ft_test(t_data *data)
 	l = 0;
 	possible = 0;
 
-	while (data->war[i] != NULL)
+	while (/*data->war[i] != NULL*/i < data->board[0])
 	{
-		while (data->war[i][j] != '\0')
+		while (/*data->war[i][j] != '\0'*/j < data->board[1])
 		{
-			while (data->shapiece[k] != NULL)
+			while (/*data->shapiece[k] != NULL*/k < data->piece[0])
 			{
-				while (data->shapiece[k][l] != '\0')
+				while (/*data->shapiece[k][l] != '\0'*/l < data->piece[1])
 				{
 					if (data->shapiece[k][l] == '*' /*&& (k + i) < data->board[0] && (l + j) < data->board[1]*/)
 					{
@@ -60,6 +60,7 @@ int         ft_test(t_data *data)
 								write (1, "0 0\n", 4);
 								return (0);
 							}
+							break ;
 						}
 						if (data->war[k + i][l + j] == data->me)
 						{
@@ -119,13 +120,13 @@ int		ft_possible_heat(t_data *data)
 	heater->j = 0;
 //	ft_heatmap(data);
 //	ft_heatmap2(data);
-	while (data->war[i] != NULL)
+	while (/*data->war[i] != NULL*/i < data->board[0])
 	{
-		while (data->war[i][j])
+		while (/*data->war[i][j]*/j < data->board[1])
 		{
-			while (data->shapiece[k] != NULL)
+			while (/*data->shapiece[k] != NULL*/k < data->piece[0])
 			{
-				while (data->shapiece[k][l])
+				while (/*data->shapiece[k][l]*/l < data->piece[1])
 				{
 					if (data->shapiece[k][l] == '*')
 					{
@@ -148,6 +149,7 @@ int		ft_possible_heat(t_data *data)
 								free(heater);
 								return (0);
 							}
+							break ;
 						}
 						if (data->war[k + i][l + j] == data->me)
 						{

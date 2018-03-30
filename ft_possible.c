@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 16:56:37 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/24 22:15:23 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/30 16:28:56 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ int			ft_2ndchance(t_data *data)
 	move->verti = data->piece[0] - 1;
 	i = 0;
 	j = 0;
+	if (data->board[1] == 0)
+	{
+		free(move);
+		return (0);
+	}
 	while (i < data->piece[0])
 	{
 		while (data->shapiece[i][j])
@@ -161,6 +166,8 @@ int         ft_possible(t_data *data)
 	k = 0;
 	l = 0;
 	possible = 0;
+	if (data->board[1] == 0)
+		return (0);
 	while (data->war[i] != NULL)
 	{
 		while (data->war[i][j])

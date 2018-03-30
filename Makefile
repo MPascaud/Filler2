@@ -6,7 +6,7 @@
 #    By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 16:02:42 by mpascaud          #+#    #+#              #
-#    Updated: 2018/03/24 19:07:57 by mpascaud         ###   ########.fr        #
+#    Updated: 2018/03/30 19:16:04 by mpascaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME) :
 	gcc $(TAGS) -c $(SRC)
 	ar rc $(NAME) $(BIN)
 	ranlib $(NAME)
-	gcc -o mpascaud.filler mpascaud.filler.c filler.a
+	gcc -g3 -fsanitize=address -o mpascaud.filler mpascaud.filler.c filler.a
 
 clean:
 	rm -fR $(BIN)

@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/25 01:47:53 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/30 18:44:03 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_free(t_data **data, int *war, int *shapiece)
 	i = 0;
 	(*war) = 0;
 	(*shapiece) = 0;
+	(*data)->board[1] = 0;
 	free((*data)->board);
 	while ((*data)->war[i])
 	{
@@ -34,6 +35,7 @@ void	ft_free(t_data **data, int *war, int *shapiece)
 	free((*data)->war[i]);
 //	i++;
 //	free((*data)->war[i]);
+	(*data)->war[0] = NULL;
 	free((*data)->war);
 	free((*data)->piece);
 	i = 0;
@@ -45,6 +47,7 @@ void	ft_free(t_data **data, int *war, int *shapiece)
 	free((*data)->shapiece[i]);
 //	i++;
 //	free((*data)->shapiece[i]);
+	(*data)->shapiece[0] = NULL;
 	free((*data)->shapiece);
 }
 
@@ -64,6 +67,10 @@ int		main(void)
 	{
 		while (get_next_line(0, &tmp))
 		{
+			if (tmp == NULL)
+			{
+				return (0);
+			}
 		//	/*if (tmp[0] == '=' ||*/ tmp == NULL/*ajout anti leaks et seg*/)//si on ne peut plus poser
 		//	{
 				//write (1, "0 0\n", 4);
@@ -142,6 +149,8 @@ int		main(void)
 			tmp = NULL;
 		//	while (1);
 		}
+		if (war == 0)
+			break ;
 //		free(tmp);
 //		ft_free(&data, &war, &shapiece);
 //		free(data);
@@ -150,7 +159,7 @@ int		main(void)
 	//	ft_heatmap(data);
 	//	ft_heatmap2(data);
 	//	ft_heatmap3(data);
-		ft_afficher_variables(data, tmp, war, shapiece);
+	//	ft_afficher_variables(data, tmp, war, shapiece);
 	//	ft_possible(data);
 	/*	if (ft_possible(data) == 0)
 		{
@@ -165,11 +174,16 @@ int		main(void)
 			ft_place_heat(data);//if possible == 1
 		         	           //if possible == 0 && possible2 == 1
 		}
-		if (data->board[0] != 15)
-			if (ft_possible(data) == 0 && ft_2ndchance(data) == 0) //&& ft_possible2 == 0
+		if (/*data->board[0] != 15 && */ft_possible(data) == 0)
+			if (/*ft_possible(data) == 0 && */ft_2ndchance(data) == 0) //&& ft_possible2 == 0
 			{
 	
 			//	ft_2ndchance(data);
+				if (data->board[1] == 0)
+				{
+					write(FDtest, "COUCOUC\n", 21);
+					return (0);
+				}
 				ft_free(&data, &war, &shapiece);
 				free(tmp);
 				free(data);
@@ -177,7 +191,7 @@ int		main(void)
 				write (1, "0 0\n", 4);
 				return (0);
 			}
-		if (data->board[0] == 15)
+		/*if (data->board[0] == 15)
 		{
 			if (ft_possible(data) == 0)
 			{
@@ -188,7 +202,7 @@ int		main(void)
 				write (1, "0 0\n", 4);
 				return (0);
 			}
-		}
+		}*/
 	//	free(tmp);
 	//	ft_free(&data, &war, &shapiece);
 //		if (ft_test(data) == 0)

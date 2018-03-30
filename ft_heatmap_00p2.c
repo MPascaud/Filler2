@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 17:07:35 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/24 21:54:12 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:38:00 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void    ft_heatmap_00p2(t_data *data)
 	okup = 0;
 	okdown = 0;
 
+	if (data->war[0] == NULL || data->shapiece[0] == NULL)
+		return ;
 	ft_okright_00p2(&okright, data);
 	ft_okup_00p2(&okup, data);
 	ft_down_00p2(&okdown, data);

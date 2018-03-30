@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 17:07:35 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/24 19:00:22 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:36:54 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int		ft_distance(t_data *data)
 {
 	if (data->board[0] == 100)
-		return (120);
+		return (100);
 	else
 		return (58);
 }
@@ -33,9 +33,11 @@ void    ft_heatmap(t_data *data)
 	i = 0;
 	change = 0;
 	heat = /*58*/ft_distance(data);
-	while (data->war[line] != NULL)
+	if (data->war[0] == NULL || data->shapiece[0] == NULL)
+		return ;
+	while (/*data->war[line] != NULL*/line < data->board[0])
 	{
-		while (data->war[line][i])
+		while (/*data->war[line][i]*/i < data->board[1])
 		{
 			if (data->war[line][i] == '.')
 				data->war[line][i] = '0';
@@ -50,9 +52,9 @@ void    ft_heatmap(t_data *data)
 	}
 	i = 0;
 	line = 0;
-	while (data->war[line] != NULL)
+	while (/*data->war[line] != NULL*/line < data->board[0])
 	{
-		while (data->war[line][i])
+		while (/*data->war[line][i]*/i < data->board[1])
 		{
 			if (data->war[line][i] == data->opp)
 			{
@@ -69,7 +71,7 @@ void    ft_heatmap(t_data *data)
 				}
 				change = i;
 				heat = /*58*/ft_distance(data);
-				while (data->war[line][change] && heat >= 0)
+				while (/*data->war[line][change]*/change < data->board[1] && heat >= 0)
 				{
 					if (data->war[line][change] != data->me && data->war[line][change] != data->opp
 							&& data->war[line][change] < heat)
@@ -89,9 +91,9 @@ void    ft_heatmap(t_data *data)
 	line = 0;
 	i = 0;
 	heat = /*58*/ft_distance(data);
-	while (data->war[line] != NULL)
+	while (/*data->war[line] != NULL*/line < data->board[0])
 	{
-		while (data->war[line][i])
+		while (/*data->war[line][i]*/i < data->board[1])
 		{
 			if (data->war[line][i] == data->opp)
 			{
@@ -138,9 +140,11 @@ void    ft_heatmap2(t_data *data)
 	i = 0;
 	change = 0;
 	heat = /*58*/ft_distance(data);
-	while (data->war[line] != NULL)
+	if (data->war[0] == NULL || data->shapiece[0] == NULL)
+		return ;	
+	while (/*data->war[line] != NULL*/line < data->board[0])
 	{
-		while (data->war[line][i])
+		while (/*data->war[line][i]*/i < data->board[1])
 		{
 			if (data->war[line][i] > 0 && data->war[line][i] <= 120)
 			{
@@ -158,7 +162,7 @@ void    ft_heatmap2(t_data *data)
 				}
 				change = i;
 				heat = data->war[line][i];
-				while (data->war[line][change] && heat >= 0)
+				while (/*data->war[line][change]*/change < data->board[1] && heat >= 0)
 				{
 					if (data->war[line][change] != data->me && data->war[line][change] != data->opp
 							&& data->war[line][change] < heat)
@@ -255,6 +259,8 @@ void    ft_heatmap_01p2(t_data *data)
 	okup = 0;
 	okdown = 0;
 
+	if (data->war[0] == NULL || data->shapiece[0] == NULL)
+		return ;
 	ft_okright_01p2(&okright, data);
 	ft_okup_01p2(&okup, data);
 	ft_down_01p2(&okdown, data);
